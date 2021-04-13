@@ -9,6 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.IO.Font.Constants;
 
 namespace WindowsFormsApp1
 {
@@ -23,7 +30,10 @@ namespace WindowsFormsApp1
 
         public string cantidad;
         public int prestamoid;
+        public string usernombre;
+        public string userappellido;
 
+        public static string src = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads\Recibo.pdf";
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -86,13 +96,17 @@ namespace WindowsFormsApp1
                     conexion.Open();
 
                 SqlCommand con = new SqlCommand("insert into historial(de, id_persona) values ('Realizo el pago de: "+cantidad+ "$ el dia "+ dateTimePicker1.Value.ToString() + "', " + Convert.ToInt32(clase.a)+ ")", conexion);
+
+                    crearPDF();
+
                     SqlCommand delete = new SqlCommand("delete prestamos where persona_id =" + Convert.ToInt32(clase.a) + "and id_prestamo = " + prestamoid, conexion);
                     int query = con.ExecuteNonQuery();
                     int query2 = delete.ExecuteNonQuery();
 
                     if (query != 0 || query2 != 0)
                     {
-                        MessageBox.Show("Se realizo el pago correctamente.");
+                        MessageBox.Show("Se realizo el pago correctamente.");        
+
                         dataGridView1.DataSource = lista();
                     }
                     else
@@ -107,6 +121,69 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
+
+        private void crearPDF()
+        {
+
+
+            string cn = ConfigurationManager.ConnectionStrings["WindowsFormsApp1.Properties.Settings.Valor"].ConnectionString;
+
+            using (SqlConnection conexion = new SqlConnection(cn))
+            {
+
+
+                conexion.Open();
+
+                SqlCommand con = new SqlCommand("select nombre, apellido from usuario where ID = " + clase.a, conexion);
+                
+                SqlDataReader r = con.ExecuteReader();
+
+
+                while (r.Read())
+                {
+                usernombre = Convert.ToString(r.GetValue(0));
+                userappellido = Convert.ToString(r.GetValue(1));
+                }
+                PdfWriter pdfwriter = new PdfWriter(src);
+
+            using (PdfWriter wPdf = new PdfWriter(pdfwriter, new WriterProperties().SetPdfVersion(PdfVersion.PDF_2_0)))
+            {
+                var ncabezado = "Fecha de pago: " + dateTimePicker1.Value.ToString();
+
+                    var nombre = "Cliente: " + usernombre + " " + userappellido;
+
+                    var id = "ID del Cliente: "+ clase.a;
+
+                var ccntidad = "Cantidad pagada: "+cantidad+"$";
+
+                var idp = "Recibo No.: " + prestamoid;
+
+                var pdfDocument = new PdfDocument(wPdf);
+
+                var document = new Document(pdfDocument, PageSize.A4);
+
+                var timesNewRoman = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
+
+                var p1 = new Paragraph();
+
+                p1.SetFont(timesNewRoman);
+                p1.SetFontSize(30);
+                p1.SetTextAlignment(TextAlignment.CENTER);
+                p1.Add("RECIBO");
+
+                document.Add(p1);
+                    document.Add(new Paragraph(nombre));
+                    document.Add(new Paragraph(idp.ToString()));
+                    document.Add(new Paragraph(ncabezado));
+                document.Add(new Paragraph(ccntidad));
+                
+
+                document.Close();
+            }
+            }
+        }
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
