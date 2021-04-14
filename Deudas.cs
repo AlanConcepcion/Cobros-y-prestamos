@@ -127,5 +127,10 @@ namespace WindowsFormsApp1
                 prestamoid = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["IDP"].FormattedValue.ToString());
             }
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Aquí se desplegara una lista con sus deudas pendientes por pagar.\nEstas solo se agregaran si pasan de la fecha limite de su prestamo.");
+        }
     }
 }

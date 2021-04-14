@@ -86,5 +86,15 @@ namespace WindowsFormsApp1
             Deudas deu = new Deudas();
             deu.Show();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Menu principal:\n \nSeleccione el boton de su conveniencia tal sea 'Cuenta'\ncomo cualquier otro boton, estos los llevaran a su\nsiguiente pestaña.");
+        }
     }
 }

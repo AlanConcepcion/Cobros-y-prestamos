@@ -151,9 +151,9 @@ namespace WindowsFormsApp1
             {
                 var ncabezado = "Fecha de pago: " + dateTimePicker1.Value.ToString();
 
-                    var nombre = "Cliente: " + usernombre + " " + userappellido;
+                var nombre = "Cliente: " + usernombre + " " + userappellido;
 
-                    var id = "ID del Cliente: "+ clase.a;
+                var id = "ID del Cliente: "+ clase.a;
 
                 var ccntidad = "Cantidad pagada: "+cantidad+"$";
 
@@ -205,6 +205,11 @@ namespace WindowsFormsApp1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Puede seleccionar un item de la lista y pagarlo posteriormente.\nSi no tiene items, puede solicitar un prestamo.");
         }
     }
 } 

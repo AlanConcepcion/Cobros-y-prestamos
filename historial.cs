@@ -62,5 +62,10 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Aqui se desplegará su lista de pagos, no podra interactuar con los items.");
+        }
     }
 }

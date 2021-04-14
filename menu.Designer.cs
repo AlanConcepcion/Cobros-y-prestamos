@@ -45,6 +45,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,23 +62,25 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(247, 219);
+            this.label2.Location = new System.Drawing.Point(214, 219);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 20);
+            this.label2.Size = new System.Drawing.Size(136, 20);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Historial";
+            this.label2.Text = "Historial de pagos";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(412, 219);
+            this.label3.Location = new System.Drawing.Point(382, 219);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 20);
+            this.label3.Size = new System.Drawing.Size(136, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Prestamo";
+            this.label3.Text = "Solicitar prestamo";
             // 
             // label4
             // 
@@ -93,11 +96,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(230, 401);
+            this.label5.Location = new System.Drawing.Point(214, 401);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 20);
+            this.label5.Size = new System.Drawing.Size(136, 40);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Enviar correo";
+            this.label5.Text = "Comunicarse con \r\n   administrador";
             // 
             // label6
             // 
@@ -134,6 +137,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.zaza);
             this.panel1.Controls.Add(this.button1);
@@ -242,6 +246,17 @@
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(522, 454);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(37, 13);
+            this.linkLabel1.TabIndex = 16;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Ayuda";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -277,5 +292,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label zaza;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
